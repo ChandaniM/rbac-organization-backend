@@ -1,5 +1,5 @@
 import express from 'express';
-// import itemRoutes from './routes/itemRoutes';
+import orgRoutes from './routes/orgRoutes';
 // import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-// app.use("/items", itemRoutes);
+app.use('/api/', orgRoutes)
 
 // Global error handler (should be after routes)
 // app.use(errorHandler);
