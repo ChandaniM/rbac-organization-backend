@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createOrgService, updateOrgService } from "../services/org.service";
+import { createorganizationwithuserService, createOrgService, updateOrgService } from "../services/org.service";
 
 export const createOrg = async (req: Request, res: Response) => {
   try {
@@ -29,6 +29,22 @@ export const updateOrg = async (req:Request , res : Response) =>{
     });
   } catch (error :any) {
      return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to create organization",
+    });
+  }
+}
+
+export const createorganizationwithuser =  async (req:Request , res : Response) =>{
+  try {
+    const org = await createorganizationwithuserService(req.body);
+
+    return res.status(201).json({
+      success: true,
+      data: org,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
       success: false,
       message: error.message || "Failed to create organization",
     });

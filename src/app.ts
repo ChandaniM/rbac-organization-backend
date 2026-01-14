@@ -1,5 +1,6 @@
 import express from 'express';
 import orgRoutes from './routes/orgRoutes';
+// import authRoutes from './routes/authRoutes';
 // import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
@@ -18,7 +19,9 @@ app.get("/", (req, res) => {
 });
 
 // Routes
+
 app.use('/api/', orgRoutes)
+// app.use('api/',authRoutes)
 
 // Global error handler (should be after routes)
 // app.use(errorHandler);
