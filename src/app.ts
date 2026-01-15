@@ -1,10 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import orgRoutes from './routes/orgRoutes';
-// import authRoutes from './routes/authRoutes';
-// import { errorHandler } from './middlewares/errorHandler';
+import jobRoutes from "./routes/job.routes"
 
 const app = express();
 
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Default help route
@@ -20,7 +25,8 @@ app.get("/", (req, res) => {
 
 // Routes
 
-app.use('/api/', orgRoutes)
+app.use('/api/', orgRoutes);
+app.use("/api",jobRoutes);
 // app.use('api/',authRoutes)
 
 // Global error handler (should be after routes)
