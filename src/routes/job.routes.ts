@@ -3,15 +3,15 @@ import { createJob, deleteJob, getJobs, updateJob } from '../controllers/job.con
 const router = Router();
 
 // 1. Create a Job
-router.post('/add', createJob);
+router.post('/:tenantId/add', createJob);
 
 // 2. Get All Jobs (for your Dynamic Table)
-router.get('/getJob', getJobs);
+router.get('/:tenantId/getJob', getJobs);
 
-// 3. Update a Job by its custom jobId (e.g., J1768...)
-router.put('/:jobId', updateJob);
+// 3. Update a Job by jobId
+router.put('/:tenantId/:jobId', updateJob);
 
 // 4. Delete a Job
-router.delete('/:jobId', deleteJob);
+router.delete('/:tenantId/:jobId', deleteJob);
 
 export default router;

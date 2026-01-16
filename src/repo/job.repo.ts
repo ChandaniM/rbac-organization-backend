@@ -1,22 +1,19 @@
-import Job from '../models/job.modal';
+import Job from "../models/job.modal";
 
 export const jobRepo = {
-  // Create
+  // CREATE
   create: async (jobData: any) => {
     return await Job.create(jobData);
   },
 
-  // Read All
-  // findAll: async (page: number, limit: number) => {
-  //   return await Job.find().sort({ createdAt: -1 });
-  // },
+  // READ ALL (tenant + pagination + search)
   findAll: async (
     page: number,
     limit: number,
-    query: any = {}
+    query: any
   ) => {
     const skip = (page - 1) * limit;
-  
+
     const [jobs, total] = await Promise.all([
       Job.find(query)
         .sort({ createdAt: -1 })
@@ -24,7 +21,7 @@ export const jobRepo = {
         .limit(limit),
       Job.countDocuments(query),
     ]);
-  
+
     return {
       data: jobs,
       pagination: {
@@ -35,20 +32,39 @@ export const jobRepo = {
       },
     };
   },
-  
-  
-  // Read One
-  findByJobId: async (jobId: string) => {
-    return await Job.findOne({ _id: jobId });
+
+  // READ ONE (tenant-safe)
+  findByJobIdAndTenant: async (
+    jobId: string,
+    tenantId: string
+  ) => {
+    return await Job.findOne({
+      _id: jobId,
+      tenantId,
+    });
   },
 
-  // Update
-  update: async (jobId: string, updateData: any) => {
-    return await Job.findOneAndUpdate({ _id: jobId },{ $set: updateData}, { new: true });
+  // UPDATE (tenant-safe)
+  updateByTenant: async (
+    jobId: string,
+    tenantId: string,
+    updateData: any
+  ) => {
+    return await Job.findOneAndUpdate(
+      { _id: jobId, tenantId },
+      { $set: updateData },
+      { new: true }
+    );
   },
 
-  // Delete
-  delete: async (jobId: string) => {
-    return await Job.findOneAndDelete({ _id:jobId });
-  }
+  // DELETE (tenant-safe)
+  deleteByTenant: async (
+    jobId: string,
+    tenantId: string
+  ) => {
+    return await Job.findOneAndDelete({
+      _id: jobId,
+      tenantId,
+    });
+  },
 };

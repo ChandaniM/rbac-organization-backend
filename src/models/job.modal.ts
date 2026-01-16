@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 export interface IJob {
+  tenantId: string;
   title: string;
   department: string;
   type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship';
@@ -13,6 +14,11 @@ export interface IJob {
 }
 
 const JobSchema = new Schema<IJob>({
+  tenantId: {
+    type: String,
+    required: true,
+    index: true,
+  },
   title: {
     type: String,
     required: true,
@@ -41,5 +47,7 @@ const JobSchema = new Schema<IJob>({
   location: String,
   salary: Number
 }, { timestamps: true });
+
+JobSchema.index({ tenantId: 1, _id: 1 });
 
 export default mongoose.model<IJob>('Job', JobSchema);
