@@ -9,3 +9,7 @@ features
 routes
 awth 
 error handling
+
+- db : mkdir -p ~/data/db    
+
+- mongod --dbpath ~/data/db 
