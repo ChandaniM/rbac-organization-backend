@@ -1,7 +1,7 @@
 import { Schema, model, Types } from "mongoose";
 
 const UserInvitationSchema = new Schema({
-  tenantId: { type: Types.ObjectId, ref: "Organization", required: true },
+  tenantId: { type: String, trim: true, required: true },
   email: { type: String, required: true },
   role_id: { type: Types.ObjectId, ref: "Role", required: true },
 

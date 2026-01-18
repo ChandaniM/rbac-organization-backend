@@ -2,7 +2,11 @@ import { Schema, model, Types } from 'mongoose';
 
 const UserSchema = new Schema(
   {
-    tenantId: { type: Types.ObjectId, ref: 'Organization', required: true },
+    tenantId: { 
+      type: String, 
+      required: true, 
+      trim: true 
+    },
     username: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, lowercase: true },
     password_hash: { type: String, required: true },

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateOrg = exports.createOrg = void 0;
+
 const org_service_1 = require("../services/org.service");
 const createOrg = async (req, res) => {
     try {

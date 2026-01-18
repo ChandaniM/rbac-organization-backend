@@ -1,6 +1,7 @@
+import { Types } from "mongoose";
 import { CreateOrgDTO, UpdateOrgDTO } from "../interface/org.interface";
 import { Organization } from "../models/organization.model";
-
+import { User } from "../models/user.model";
 export const createOrg = async (data: CreateOrgDTO) => {
   const org = new Organization({
     name: data.name,
@@ -25,4 +26,12 @@ export const updateOrg = async (id:string , data:any) => {
 
 
   return updatedOrg;
+};
+
+export const findOrgByTenantString = async (tenantId: string) => {
+  if (!Types.ObjectId.isValid(tenantId)) {
+    throw new Error("Invalid tenantId format");
+  }
+
+  return Organization.findById(new Types.ObjectId(tenantId));
 };
