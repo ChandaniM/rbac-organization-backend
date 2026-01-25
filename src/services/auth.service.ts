@@ -30,8 +30,8 @@
 // }
 
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { findUserByEmail } from '../repo/user.repo';
-import { Types } from 'mongoose';
 import { findOrgByTenantString } from '../repo/org.repo';
 export interface IOrganization {
   _id: string;
@@ -42,32 +42,66 @@ export interface IOrganization {
   parent_id?: string | null;
 }
 
+// export const loginService = async (email: string, password: string) => {
+//   console.log(email, 'email');
+//   let userData = await findUserByEmail(email);
+//   console.log(userData, 'USER DETAILS ');
+//   if (!userData) {
+//     throw new Error('User not found');
+//   }
+
+// //   if (userData.is_active !== true) throw new Error("User is inactive");
+
+//   const isPasswordValid = await bcrypt.compare(
+//     password,
+//     userData.password_hash,
+//   );
+//   if (!isPasswordValid) {
+//     throw new Error('Invalid credentials');
+//   }
+
+//   const org = await findOrgByTenantString(userData.tenantId);
+//   console.log(org, 'THIS IS ORG DATA ');
+//   if (!org) {
+//     throw new Error('Organization not found');
+//   }
+
+//   return {
+//     tenantId: org._id, // THIS is tenantId
+//     user: {
+//       id: userData._id,
+//       username: userData.username,
+//       email: userData.email,
+//     },
+//     org: {
+//       name: org.name,
+//       display_name: org.display_name,
+//       description: org.description,
+//       status: org.status,
+//       parent_id: org.parent_id,
+//     },
+//   };
+// };
+
+
+const JWT_SECRET = process.env.JWT_SECRET || "super_secret_key";
+
 export const loginService = async (email: string, password: string) => {
-  console.log(email, 'email');
-  let userData = await findUserByEmail(email);
-  console.log(userData, 'USER DETAILS ');
-  if (!userData) {
-    throw new Error('User not found');
-  }
+  // 1. Find User
+  const userData = await findUserByEmail(email);
+  if (!userData) throw new Error('User not found');
 
-//   if (userData.is_active !== true) throw new Error("User is inactive");
+  // 2. Validate Password
+  const isPasswordValid = await bcrypt.compare(password, userData.password_hash);
+  if (!isPasswordValid) throw new Error('Invalid credentials');
 
-  const isPasswordValid = await bcrypt.compare(
-    password,
-    userData.password_hash,
-  );
-  if (!isPasswordValid) {
-    throw new Error('Invalid credentials');
-  }
-
+  // 3. Find Organization
   const org = await findOrgByTenantString(userData.tenantId);
-  console.log(org, 'THIS IS ORG DATA ');
-  if (!org) {
-    throw new Error('Organization not found');
-  }
+  if (!org) throw new Error('Organization not found');
 
-  return {
-    tenantId: org._id, // THIS is tenantId
+  const payload = {
+    userId: userData._id,
+    tenantId: org._id,
     user: {
       id: userData._id,
       username: userData.username,
@@ -78,7 +112,26 @@ export const loginService = async (email: string, password: string) => {
       display_name: org.display_name,
       description: org.description,
       status: org.status,
-      parent_id: org.parent_id,
+    },
+  };
+
+  // 5. Generate the Token
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+
+  // 6. Return everything your frontend needs
+  return {
+    token, // The new JWT token
+    tenantId: org._id,
+    user: {
+      id: userData._id,
+      username: userData.username,
+      email: userData.email,
+    },
+    org: {
+      name: org.name,
+      display_name: org.display_name,
+      description: org.description,
+      status: org.status,
     },
   };
 };

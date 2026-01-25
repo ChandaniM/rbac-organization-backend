@@ -1,12 +1,13 @@
 import { Schema, model, Types } from "mongoose";
 
 const RolePermissionSchema = new Schema({
+  tenantId: { type: String, required: true, index: true },
   role_id: { type: Types.ObjectId, ref: "Role", required: true },
   permission_id: { type: Types.ObjectId, ref: "Permission", required: true },
 });
 
 RolePermissionSchema.index(
-  { role_id: 1, permission_id: 1 },
+  { tenantId: 1, role_id: 1, permission_id: 1 },
   { unique: true }
 );
 
