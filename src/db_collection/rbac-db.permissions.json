@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec0"
+  },
+  "name": "create_organization",
+  "description": "Create tenants"
+},
+{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  },
+  "name": "add_users",
+  "description": "Add users"
+},
+{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  },
+  "name": "assign_roles",
+  "description": "Assign roles"
+},
+{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  },
+  "name": "view_team",
+  "description": "View team"
+},
+{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec4"
+  },
+  "name": "edit_team",
+  "description": "Edit team"
+},
+{
+  "_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  },
+  "name": "view_profile",
+  "description": "View profile"
+}]

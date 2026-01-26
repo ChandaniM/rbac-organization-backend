@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "696baedf72827ec176b91ee5"
+  },
+  "tenantId": "696baedf72827ec176b91ee3",
+  "username": "idfy_admin",
+  "email": "admin@idfy.com",
+  "password_hash": "$2b$10$7NlgvofzqtPNC6OiRvio3.19tPa5i2rIo4W1XufGfzyoLingJu7tO",
+  "is_active": true,
+  "email_verified": false,
+  "created_at": {
+    "$date": "2026-01-17T15:46:39.944Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696ca69372827ec176b91ef2"
+  },
+  "tenantId": "696ca69372827ec176b91ef0",
+  "username": "acme_admin",
+  "email": "admin@acme.com",
+  "password_hash": "$2b$10$XzjZsnoTkPlHvBxtlJrh/Os6wEm9yHjRsVjie2qI/6WGxJVVeFfKO",
+  "is_active": true,
+  "email_verified": false,
+  "created_at": {
+    "$date": "2026-01-18T09:23:31.756Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696cd83b9f5cd8d4f5ede992"
+  },
+  "email": "admin@system.com",
+  "username": "superadmin",
+  "password_hash": "$2a$10$PaVB/hnt8dhI2MZnvvJczO0uq6YYJZKiIwyJmfJrcQbXhsycExMD.",
+  "is_active": true,
+  "email_verified": true,
+  "created_at": {
+    "$date": "2026-01-18T12:55:23.128Z"
+  },
+  "tenantId": "000000000000000000000001"
+}]

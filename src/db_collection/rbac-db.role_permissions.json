@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0964"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "ROLE_SUPER_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec0"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0965"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "ROLE_SUPER_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0966"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "ROLE_SUPER_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0967"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "ROLE_SUPER_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0968"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "ROLE_SUPER_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  }
+}]

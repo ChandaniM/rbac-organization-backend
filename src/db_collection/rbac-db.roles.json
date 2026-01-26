@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "696cda209f5cd8d4f5ede994"
+  },
+  "tenantId": "696baedf72827ec176b91ee3",
+  "name": "temp_role",
+  "created_at": {
+    "$date": "2026-01-18T13:03:28.747Z"
+  }
+},
+{
+  "_id": "ROLE_SUPER_ADMIN",
+  "tenantId": "000000000000000000000001",
+  "name": "System Admin",
+  "description": "Unrestricted access to the entire platform",
+  "createdAt": {
+    "$date": "2026-01-19T17:19:58.026Z"
+  }
+}]

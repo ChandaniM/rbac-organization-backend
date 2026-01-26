@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "696baedf72827ec176b91ee3"
+  },
+  "name": "IDFY",
+  "display_name": "IDFY Corp",
+  "description": "IDFY is a software company.",
+  "status": "active",
+  "parent_id": null,
+  "createdAt": {
+    "$date": "2026-01-17T15:46:39.826Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-17T15:46:39.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696ca69372827ec176b91ef0"
+  },
+  "name": "ACME",
+  "display_name": "ACME Corp",
+  "description": "ACME is a software company.",
+  "status": "active",
+  "parent_id": null,
+  "createdAt": {
+    "$date": "2026-01-18T09:23:31.555Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-18T09:23:31.555Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "000000000000000000000001"
+  },
+  "name": "SYSTEM_ADMIN_ROOT",
+  "display_name": "System Administrator",
+  "description": "Root organization for platform-wide management",
+  "status": "active",
+  "parent_id": null,
+  "created_by": "SYSTEM_BOOTSTRAP",
+  "createdAt": {
+    "$date": "2026-01-19T17:17:16.453Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T17:17:16.453Z"
+  }
+}]
