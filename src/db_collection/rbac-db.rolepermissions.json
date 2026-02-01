@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca481"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca482"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca483"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec4"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca484"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca485"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  },
+  "__v": 0
+}]

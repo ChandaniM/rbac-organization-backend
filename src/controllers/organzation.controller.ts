@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createorganizationwithuserService, createOrgService, updateOrgService } from "../services/org.service";
+import { createorganizationwithuserService, createOrgService, updateOrgService  , getAllOrgData } from "../services/org.service";
 
 export const createOrg = async (req: Request, res: Response) => {
   try {
@@ -50,3 +50,18 @@ export const createorganizationwithuser =  async (req:Request , res : Response) 
     });
   }
 }
+export const getAllOrg = async (req: Request, res: Response) => {
+  try {
+    const data = await getAllOrgData();
+
+    return res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch organizations",
+    });
+  }
+};

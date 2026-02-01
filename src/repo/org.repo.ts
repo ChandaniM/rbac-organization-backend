@@ -38,3 +38,10 @@ export const findOrgByTenantString = async (tenantId: string) => {
 
   return Organization.findById(new Types.ObjectId(tenantId));
 };
+
+
+export const getAllOrgDataRepo = async () => {
+  const organizations = await Organization.find().sort({ createdAt: -1 }).lean();
+  console.log(organizations , "getAllOrgDataRepo........")
+  return organizations;
+}
