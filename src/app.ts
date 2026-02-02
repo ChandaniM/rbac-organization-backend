@@ -5,6 +5,7 @@ import jobRoutes from "./routes/job.routes"
 import orgEmpRoutes from "./routes/orgEmpRoutes";
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/user.routes';
+import documentRoutes from './routes/document.routes';
 const app = express();
 
 app.use(cors({
@@ -27,12 +28,12 @@ app.get("/", (req, res) => {
 
 // Routes
 
+app.use('/api/resources', documentRoutes);
 app.use('/api', orgRoutes);
-app.use("/api",jobRoutes);
 app.use("/api", orgEmpRoutes)
 app.use('/api',authRoutes)
 app.use('/api' , userRoutes)
-
+app.use("/api",jobRoutes);
 // Global error handler (should be after routes)
 // app.use(errorHandler);
 

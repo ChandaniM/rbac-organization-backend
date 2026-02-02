@@ -1,3 +1,9 @@
 node_modules
 .env
 src/db
+# LocalStack state
+localstack_storage_data/
+.localstack/
+
+**/localstack_storage_data/
+**/.localstack/
