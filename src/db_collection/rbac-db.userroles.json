@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca487"
+  },
+  "user_id": {
+    "$oid": "697e02d5765a90b73aaca47c"
+  },
+  "role_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "assigned_at": {
+    "$date": "2026-01-31T13:25:41.289Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1b3"
+  },
+  "user_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1a8"
+  },
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "assigned_at": {
+    "$date": "2026-02-01T09:53:24.047Z"
+  },
+  "__v": 0
+}]

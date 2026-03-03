@@ -62,4 +62,119 @@
     "$oid": "696ce49f51757fcb952b8ec3"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0964"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "SYSTEM_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec0"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0965"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "SYSTEM_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0966"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "SYSTEM_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0967"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "SYSTEM_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e78cb57c86bef11bf0968"
+  },
+  "tenantId": "000000000000000000000001",
+  "role_id": "SYSTEM_ADMIN",
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  }
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1ad"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1ae"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1af"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec4"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1b0"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1b1"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "role_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  },
+  "__v": 0
 }]

@@ -1,19 +1,39 @@
 [{
-  "_id": {
-    "$oid": "696cda209f5cd8d4f5ede994"
-  },
-  "tenantId": "696baedf72827ec176b91ee3",
-  "name": "temp_role",
-  "created_at": {
-    "$date": "2026-01-18T13:03:28.747Z"
-  }
-},
-{
   "_id": "ROLE_SUPER_ADMIN",
   "tenantId": "000000000000000000000001",
-  "name": "System Admin",
+  "name": "SYSTEM_ADMIN",
   "description": "Unrestricted access to the entire platform",
   "createdAt": {
     "$date": "2026-01-19T17:19:58.026Z"
   }
+},
+{
+  "_id": {
+    "$oid": "697e02d5765a90b73aaca47e"
+  },
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "name": "org_admin",
+  "description": "Organization Administrator",
+  "createdAt": {
+    "$date": "2026-01-31T13:25:41.275Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T13:25:41.275Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697f2294fc0e8cdc53c9f1aa"
+  },
+  "tenantId": "697f2293fc0e8cdc53c9f1a6",
+  "name": "org_admin",
+  "description": "Organization Administrator",
+  "createdAt": {
+    "$date": "2026-02-01T09:53:24.034Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-01T09:53:24.034Z"
+  },
+  "__v": 0
 }]
