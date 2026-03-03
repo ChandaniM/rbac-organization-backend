@@ -106,3 +106,5 @@ Table dashboard {
   logo_url varchar
   config json
 }
+
+admin@system@123

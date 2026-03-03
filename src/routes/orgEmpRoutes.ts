@@ -23,10 +23,15 @@
 
 
 import { Router } from "express";
-import { createOrgEmp } from "../controllers/orgEmployee.controller";
+import * as userCtrl from "../controllers/orgEmployee.controller";
+
 const router = Router();
 
-router.post("/:tenantId/emp",createOrgEmp)
-
+router.post("/:tenantId/users", userCtrl.createUser);
+router.get("/:tenantId/users", userCtrl.getAllUsers);
+router.get("/:tenantId/users/:userId", userCtrl.getUserById);
+router.put("/:tenantId/users/:userId", userCtrl.updateUser);
+router.delete("/:tenantId/users/:userId", userCtrl.deleteUser);
 
 export default router;
+
