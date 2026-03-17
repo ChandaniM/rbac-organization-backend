@@ -36,4 +36,19 @@
     "$date": "2026-02-01T09:53:24.034Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "name": "org_admin",
+  "description": "Organization Administrator",
+  "createdAt": {
+    "$date": "2026-03-03T16:27:33.955Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-03T16:27:33.955Z"
+  },
+  "__v": 0
 }]

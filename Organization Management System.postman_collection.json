@@ -1,0 +1,617 @@
+{
+  "info": {
+    "_postman_id": "7181cba4-a5d8-4e05-9c4b-608ee522bcff",
+    "name": "Organization Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23889152"
+  },
+  "item": [
+    {
+      "name": "Job portal",
+      "item": [
+        {
+          "name": "Update BY id job",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\":\"Closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/6968f5335851f66ea38593eb",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "6968f5335851f66ea38593eb"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/696a686ac440c48b237aa168",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "696a686ac440c48b237aa168"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Job Portal - Add",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"department\": \"Product\",\n    \"description\": \"kkned\",\n    \"experience\": \"Junior\",\n    \"location\": \"Remote\",\n    \"salary\": 82000,\n    \"title\": \"React Developer\",\n    \"type\": \"Full-time\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/add",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Job",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/getJob?page=1&limit=10",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "getJob"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": "Marketing",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Org employee",
+      "item": [
+        {
+          "name": "New Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"mirnaljain\",\n  \"email\": \"mirnal.jain@idfy.com\",\n  \"password\": \"mirnal.jain\",\n  \"is_active\": true,\n  \"role\" : \"manager\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/emp",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "emp"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ORG_EMPLOYEE",
+      "item": [
+        {
+          "name": "Add New Employee_CREATE USER",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"rahul\",\n    \"email\": \"rahul@test.com\",\n    \"password\": \"123456\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/users",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET ALL USERS (no pagination)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/users",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET ALL USERS (pagination + search)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/users?page=1&limit=10&search=rahul",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": "rahul"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET USER BY ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/users/{{userId}}",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UPDATE USER",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"rahul_updated\",\n    \"password\": \"newpassword123\",\n    \"is_active\": true\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}}/users/65bdf98f3a1c9a0012345678",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}}",
+                "users",
+                "65bdf98f3a1c9a0012345678"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE USER",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}}/users/{{userId}}",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}}",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Soft Delete",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"is_active\": false\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/{{tenantId}}/users/{{userId}}",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "{{tenantId}}",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "System_admin",
+      "item": [
+        {
+          "name": "add new organization",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"IDFY\",\n  \"display_name\": \"IDFY Corp\",\n  \"description\":\"IDFY is a software company.\",\n  \"status\": \"active\",\n  \"created_by\": \"super admin\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/org",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "org"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Org",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"display_name\":\"IDFY\",\n    \"description\" : \"IDFY is a Indian identity verification and fraud prevention technology company.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/update/?id=695ac4c1cd01224bd3b5f6d0",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "update",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "695ac4c1cd01224bd3b5f6d0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add org with default User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"org\": {\n    \"name\": \"ACME\",\n  \"display_name\": \"ACME Corp\",\n  \"description\":\"ACME is a software company.\",\n  \"status\": \"active\",\n  \"created_by\": \"super admin\"\n  },\n  \"user\": {\n    \"email\": \"admin@acme.com\",\n    \"username\": \"acme_admin\",\n    \"password\": \"StrongPassword123\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/organizationwithuser",
+              "host": [
+                "{{dev}}"
+              ],
+              "path": [
+                "organizationwithuser"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get All Organization",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@idfy.com\",\n  \"password\": \"yourpassword123\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{dev}}/login",
+          "host": [
+            "{{dev}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "protected routes",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@idfy.com\",\n  \"password\": \"yourpassword123\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{dev}}/login",
+          "host": [
+            "{{dev}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete document",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Create Announcement",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json, text/plain, */*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer null"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Origin",
+            "value": "http://localhost:5173"
+          },
+          {
+            "key": "Referer",
+            "value": "http://localhost:5173/"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-site"
+          },
+          {
+            "key": "Sec-GPC",
+            "value": "1"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdlMDJkNTc2NWE5MGI3M2FhY2E0N2MiLCJ0ZW5hbnRJZCI6IjY5N2UwMmQ1NzY1YTkwYjczYWFjYTQ3YSIsInVzZXIiOnsiaWQiOiI2OTdlMDJkNTc2NWE5MGI3M2FhY2E0N2MiLCJ1c2VybmFtZSI6IlJhdGFuIE5hdmFsIFRhdGEiLCJlbWFpbCI6InJhdGFuQHRhdGEuY29tIn0sIm9yZyI6eyJuYW1lIjoiVENTIiwiZGlzcGxheV9uYW1lIjoiVGF0YSBDb25zdWx0YW5jeSBTZXJ2aWNlcyIsImRlc2NyaXB0aW9uIjoiVGF0YSBDb25zdWx0YW5jeSBTZXJ2aWNlcyBMaW1pdGVkWzRdIChUQ1MpIGlzIGFuIEluZGlhbiBtdWx0aW5hdGlvbmFsIHRlY2hub2xvZ3kgY29tcGFueSBzcGVjaWFsaXppbmcgaW4gaW5mb3JtYXRpb24gdGVjaG5vbG9neSBzZXJ2aWNlcyBhbmQgY29uc3VsdGluZy4iLCJzdGF0dXMiOiJhY3RpdmUifSwicm9sZXMiOnsiX2lkIjoiNjk3ZTAyZDU3NjVhOTBiNzNhYWNhNDdlIiwidGVuYW50SWQiOiI2OTdlMDJkNTc2NWE5MGI3M2FhY2E0N2EiLCJuYW1lIjoib3JnX2FkbWluIiwiZGVzY3JpcHRpb24iOiJPcmdhbml6YXRpb24gQWRtaW5pc3RyYXRvciIsImNyZWF0ZWRBdCI6IjIwMjYtMDEtMzFUMTM6MjU6NDEuMjc1WiIsInVwZGF0ZWRBdCI6IjIwMjYtMDEtMzFUMTM6MjU6NDEuMjc1WiIsIl9fdiI6MH0sImlhdCI6MTc3MDIyNDE3MCwiZXhwIjoxNzcwMjI3NzcwfQ.WFhE9VluxUjN4RNHrvMryw4uN7qJ2jaQiQlyPAdTpdE",
+            "type": "text"
+          },
+          {
+            "key": "createdBy",
+            "value": "697e02d5765a90b73aaca47c",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Holiday Notice\",\n    \"description\": \"Office will be closed on Friday\",\n    \"priority\": \"high\",\n    \"createdBy\": \"65a7f9e3b9c8a12f12345678\"\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{dev}}/announcements/697e02d5765a90b73aaca47a/addAnnouncement",
+          "host": [
+            "{{dev}}"
+          ],
+          "path": [
+            "announcements",
+            "697e02d5765a90b73aaca47a",
+            "addAnnouncement"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}

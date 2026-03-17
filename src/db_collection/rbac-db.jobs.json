@@ -1,66 +1,22 @@
 [{
   "_id": {
-    "$oid": "6968f4fe5851f66ea38593e5"
+    "$oid": "69837adf70488cf32dc812fd"
   },
-  "title": "React Developer",
-  "department": "Engineering",
-  "type": "Full-time",
+  "tenantId": "697e02d5765a90b73aaca47a",
+  "title": "react",
+  "department": "Product",
+  "type": "Part-time",
   "status": "Active",
   "applicants": 0,
-  "description": "Front-End Development: Develop new user-facing features and optimise ",
-  "experience": "Junior",
-  "location": "Remote",
-  "salary": 100000,
-  "createdAt": {
-    "$date": "2026-01-15T14:09:02.366Z"
-  },
-  "updatedAt": {
-    "$date": "2026-01-15T14:09:13.893Z"
-  },
-  "__v": 0,
-  "tenantId": "696baedf72827ec176b91ee3"
-},
-{
-  "_id": {
-    "$oid": "6968f5335851f66ea38593eb"
-  },
-  "title": "Designer Developer",
-  "department": "Design",
-  "type": "Contract",
-  "status": "Closed",
-  "applicants": 0,
-  "description": "",
+  "description": "test",
   "experience": "Mid",
   "location": "Remote",
   "salary": 100000,
   "createdAt": {
-    "$date": "2026-01-15T14:09:55.246Z"
+    "$date": "2026-02-04T16:59:11.130Z"
   },
   "updatedAt": {
-    "$date": "2026-01-16T17:12:12.017Z"
-  },
-  "__v": 0,
-  "tenantId": "696baedf72827ec176b91ee3"
-},
-{
-  "_id": {
-    "$oid": "696ca79772827ec176b91f14"
-  },
-  "tenantId": "696ca69372827ec176b91ef0",
-  "title": "Senior Java Developer",
-  "department": "Engineering",
-  "type": "Full-time",
-  "status": "Active",
-  "applicants": 0,
-  "description": "Experience: 5-10 Years\nLocation: Mumbai\nMode of Work: Full time\nStrong experience in building products or applications from scratch (not just maintenance/support). \nGood understanding of object-oriented programming principles.\nExperience with frameworks like Spring, Spring Boot, Hibernate, etc. ",
-  "experience": "Senior",
-  "location": "Remote",
-  "salary": 1500000,
-  "createdAt": {
-    "$date": "2026-01-18T09:27:51.202Z"
-  },
-  "updatedAt": {
-    "$date": "2026-01-18T09:27:51.202Z"
+    "$date": "2026-02-04T16:59:11.130Z"
   },
   "__v": 0
 }]

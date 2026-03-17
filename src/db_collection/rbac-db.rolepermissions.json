@@ -177,4 +177,69 @@
     "$oid": "696ce49f51757fcb952b8ec3"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e83"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "role_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec1"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e84"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "role_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec2"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e85"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "role_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec4"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e86"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "role_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec5"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a70bf590dc1d3691763e87"
+  },
+  "tenantId": "69a70bf590dc1d3691763e7c",
+  "role_id": {
+    "$oid": "69a70bf590dc1d3691763e80"
+  },
+  "permission_id": {
+    "$oid": "696ce49f51757fcb952b8ec3"
+  },
+  "__v": 0
 }]
