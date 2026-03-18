@@ -41,3 +41,37 @@ export const checkPermission = (permissionId: string) => {
     }
   };
 };
+
+/**
+ * Ensures the caller is an `ORG_ADMIN` for the `:tenantId` route param.
+ * Allows `SYSTEM_ADMIN` to operate across tenants (optional).
+ */
+export const requireOrgAdminForTenantParam = (paramName: string = "tenantId") => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user as any;
+    if (!user) return res.status(401).json({ message: "Unauthenticated" });
+
+    const roleName: string | undefined = user?.roles?.name ?? user?.role ?? user?.roleName;
+    const normalizedRole = roleName ? String(roleName).toUpperCase() : undefined;
+
+    const requestedTenantId = req.params?.[paramName];
+    const userTenantId = user?.tenantId;
+
+    if (!requestedTenantId) {
+      return res.status(400).json({ message: `Missing route param: ${paramName}` });
+    }
+
+    // Allow system admin to operate across tenants
+    if (normalizedRole === "SYSTEM_ADMIN") return next();
+
+    if (normalizedRole !== "ORG_ADMIN") {
+      return res.status(403).json({ message: "Access denied: ORG_ADMIN role required" });
+    }
+
+    if (!userTenantId || String(userTenantId) !== String(requestedTenantId)) {
+      return res.status(403).json({ message: "Access denied: tenant mismatch" });
+    }
+
+    return next();
+  };
+};

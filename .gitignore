@@ -7,3 +7,4 @@ localstack_storage_data/
 
 **/localstack_storage_data/
 **/.localstack/
+dist/

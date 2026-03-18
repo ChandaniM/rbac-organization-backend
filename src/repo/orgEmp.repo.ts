@@ -129,6 +129,65 @@ export const orgEmpRepo = {
     return await UserHierarchy.create([{ tenantId, userId, managerId }], { session });
   },
 
+  /**
+   * Upsert hierarchy assignment for a specific user inside a tenant.
+   * Replaces any existing manager for that user.
+   */
+  assignHierarchy: async (tenantId: string, userId: string, managerId: string) => {
+    return await UserHierarchy.findOneAndUpdate(
+      { tenantId, userId },
+      { tenantId, userId, managerId },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+  },
+
+  /**
+   * Fetch hierarchy edges for a tenant and return a format that can be used
+   * to build a tree in the frontend.
+   */
+  getHierarchyTree: async (tenantId: string) => {
+    // Always include all tenant users so the org admin (root) shows up
+    // even when there are no hierarchy edges yet.
+    const allUsers = await User.find({ tenantId })
+      .select("_id username job_title department avatar")
+      .lean();
+
+    const userMap = new Map<string, any>();
+    for (const u of allUsers) {
+      const id = String(u._id);
+      userMap.set(id, {
+        id,
+        name: u.username,
+        jobTitle: u.job_title || "",
+        department: u.department || "",
+        avatar: u.avatar || "",
+      });
+    }
+
+    const edges = await UserHierarchy.find({ tenantId })
+      .populate("userId", "username job_title department avatar")
+      .populate("managerId", "username job_title department avatar");
+
+    const edgeList: Array<{ managerId: string; userId: string }> = [];
+
+    for (const h of edges) {
+      const user: any = h.userId;
+      const manager: any = h.managerId;
+
+      const userIdStr = String(user?._id ?? "");
+      const managerIdStr = String(manager?._id ?? "");
+
+      if (managerIdStr && userIdStr) {
+        edgeList.push({ managerId: managerIdStr, userId: userIdStr });
+      }
+    }
+
+    return {
+      users: Array.from(userMap.values()),
+      edges: edgeList,
+    };
+  },
+
   findUserByEmail: async (tenantId: string, email: string) => {
     return await User.findOne({ tenantId, email });
   }
