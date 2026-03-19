@@ -1,12 +1,16 @@
 import bcrypt from "bcryptjs";
 import { User } from "../models/user.model";
 
-// CREATE
+// CREATE - maps all FE payload fields to DB
 export const createUser = async (
   tenantId: string,
   data: any
 ) => {
   const { username, email, password } = data;
+
+  if (!username || !email || !password) {
+    throw new Error("Username, email and password are required");
+  }
 
   const exists = await User.findOne({ tenantId, email });
   if (exists) {
@@ -17,9 +21,16 @@ export const createUser = async (
 
   return await User.create({
     tenantId,
-    username,
-    email,
+    username: String(data.username ?? "").trim(),
+    email: String(data.email ?? "").toLowerCase().trim(),
     password_hash,
+    is_active: data.is_active !== undefined ? Boolean(data.is_active) : true,
+    job_title: String(data.job_title ?? "").trim(),
+    department: String(data.department ?? "").trim(),
+    location: String(data.location ?? "").trim(),
+    phone: String(data.phone ?? "").trim(),
+    business_unit: String(data.business_unit ?? "").trim(),
+    avatar: String(data.avatar ?? "").trim(),
   });
 };
 
@@ -81,14 +92,27 @@ export const updateUser = async (
   userId: string,
   data: any
 ) => {
-  if (data.password) {
-    data.password_hash = await bcrypt.hash(data.password, 10);
-    delete data.password;
+  const updatePayload: Record<string, unknown> = {};
+
+  // Map all allowed FE fields to DB
+  if (data.username !== undefined) updatePayload.username = String(data.username).trim();
+  if (data.email !== undefined) updatePayload.email = String(data.email).toLowerCase().trim();
+  if (data.is_active !== undefined) updatePayload.is_active = Boolean(data.is_active);
+  if (data.job_title !== undefined) updatePayload.job_title = String(data.job_title).trim();
+  if (data.department !== undefined) updatePayload.department = String(data.department).trim();
+  if (data.location !== undefined) updatePayload.location = String(data.location).trim();
+  if (data.phone !== undefined) updatePayload.phone = String(data.phone).trim();
+  if (data.business_unit !== undefined) updatePayload.business_unit = String(data.business_unit).trim();
+  if (data.avatar !== undefined) updatePayload.avatar = String(data.avatar).trim();
+
+  // Hash password if provided
+  if (data.password && String(data.password).trim() !== "") {
+    updatePayload.password_hash = await bcrypt.hash(data.password, 10);
   }
 
   const user = await User.findOneAndUpdate(
     { _id: userId, tenantId },
-    data,
+    { $set: updatePayload },
     { new: true }
   ).select("-password_hash");
 
