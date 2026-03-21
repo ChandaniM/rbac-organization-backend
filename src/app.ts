@@ -9,6 +9,8 @@ import documentRoutes from './routes/document.routes';
 import announcementRoutes from './routes/announcement.routes';
 import dashboardRoutes from './routes/dashboard.routes';
 import NotificationRoutes from './routes/notification.routes';
+import auditLogRoutes from './routes/audit-log.routes';
+import { auditLogMiddleware } from './middlewares/audit-log.middleware';
 const app = express();
 
 app.use(cors({
@@ -17,6 +19,11 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
+
+// Add audit logging middleware
+app.use(auditLogMiddleware({
+  excludePaths: ['/health', '/metrics', '/api/audit-logs']
+}));
 
 // Default help route
 app.get("/", (req, res) => {
@@ -40,6 +47,7 @@ app.use("/api",jobRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use('/api', dashboardRoutes);
 app.use('/api/notifications', NotificationRoutes);
+app.use('/api', auditLogRoutes);
 // Global error handler (should be after routes)
 // app.use(errorHandler);
 
