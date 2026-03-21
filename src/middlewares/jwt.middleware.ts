@@ -42,6 +42,17 @@ export const checkPermission = (permissionId: string) => {
   };
 };
 
+export const requireSystemAdmin = (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user as any;
+  if (!user) return res.status(401).json({ message: "Unauthenticated" });
+  const roleName = user?.roles?.name ?? user?.role ?? user?.roleName;
+  const normalized = roleName ? String(roleName).toUpperCase() : "";
+  if (normalized !== "SYSTEM_ADMIN") {
+    return res.status(403).json({ message: "Access denied: SYSTEM_ADMIN required" });
+  }
+  next();
+};
+
 /**
  * Ensures the caller is an `ORG_ADMIN` for the `:tenantId` route param.
  * Allows `SYSTEM_ADMIN` to operate across tenants (optional).

@@ -26,8 +26,15 @@ export const loginService = async (email: string, password: string) => {
   // 3. Find Organization
   const org = await findOrgByTenantString(userData.tenantId);
   if (!org) throw new Error('Organization not found');
+
+  // 4. Check org is active (skip for system org)
+  const isSystemOrg = org.name === 'SYSTEM_ADMIN' || String(userData.tenantId) === '000000000000000000000001';
+  if (!isSystemOrg && org.status !== 'active') {
+    throw new Error('Your organization is inactive. Please contact your administrator.');
+  }
+
+  // 5. Get roles
   const rolesDetails = await findRoleByTenantid(userData.tenantId);
-  console.log(rolesDetails , "roles and details .......")
   const payload = {
     userId: userData._id,
     tenantId: org._id,
@@ -45,10 +52,8 @@ export const loginService = async (email: string, password: string) => {
     roles : rolesDetails
   };
 
-  // 5. Generate the Token
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
-  // 6. Return everything your frontend needs
   return {
     token, // The new JWT token
     tenantId: org._id,
