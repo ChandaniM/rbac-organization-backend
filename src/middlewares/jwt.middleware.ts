@@ -75,3 +75,43 @@ export const requireOrgAdminForTenantParam = (paramName: string = "tenantId") =>
     return next();
   };
 };
+
+// src/middlewares/jwt.middleware.ts
+
+// add at the bottom — no DB calls needed
+export const fetchRequestContext = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    const jwtUser = req.user as any;
+
+    if (!jwtUser?.userId || !jwtUser?.tenantId) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+
+    // Map JWT payload (preserve tenantId/roleId/roles for permission checks)
+    req.user = {
+      id:        jwtUser.userId,
+      userId:    jwtUser.userId,
+      tenantId:  jwtUser.tenantId,
+      roleId:    jwtUser.roleId,
+      roles:     jwtUser.roles,
+      username:  jwtUser.user?.username ?? '',
+      email:     jwtUser.user?.email ?? '',
+    } as any;
+
+    req.org = {
+      id:           jwtUser.tenantId,
+      userId:       jwtUser.tenantId,
+      name:         jwtUser.org?.name ?? '',
+      display_name: jwtUser.org?.display_name ?? jwtUser.org?.name ?? '',
+    };
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};

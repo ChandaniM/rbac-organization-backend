@@ -100,7 +100,7 @@ Table user_hierarchy {
   manager_id int [ref: > users.id]
 }
 
-Table dashboard {
+Table org_settings {
   id int [pk]
   tenantId int [ref: > org.id]
   logo_url varchar
