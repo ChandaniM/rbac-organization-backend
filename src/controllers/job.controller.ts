@@ -6,7 +6,7 @@ import { createJobService, deleteJobService, getAllJobsService, updateJobService
 // CREATE: Post a new job
 export const createJob = async (req:Request, res:Response) => {
   try {
-    const { tenantId } = req.params;
+    const { tenantId } = req.params as { tenantId: string };
     const newJob = {
       ...req.body,
       tenantId,
@@ -22,7 +22,7 @@ export const createJob = async (req:Request, res:Response) => {
 // READ: Get all jobs
 export const getJobs = async (req: Request, res: Response) => {
   try {
-    const { tenantId } = req.params;
+    const { tenantId } = req.params as { tenantId: string };
 
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
@@ -45,7 +45,7 @@ export const getJobs = async (req: Request, res: Response) => {
 // UPDATE: Edit a job using its jobId
 export const updateJob = async (req: Request, res: Response) => {
   try {
-    const { tenantId, jobId } = req.params;
+    const { tenantId, jobId } = req.params as { tenantId: string; jobId: string };
 
     const updatedJob = await updateJobService(
       tenantId,
@@ -66,8 +66,8 @@ export const deleteJob = async (req: Request, res: Response) => {
     const { tenantId, jobId } = req.params;
 
     const deletedJob = await deleteJobService(
-      tenantId,
-      jobId
+      tenantId as string,
+      jobId as string
     );
 
     res.status(200).json(deletedJob);

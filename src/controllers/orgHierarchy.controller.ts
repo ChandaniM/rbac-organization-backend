@@ -4,7 +4,7 @@ import * as orgHierarchyService from "../services/orgHierarchy.service";
 // POST /api/:tenantId/hierarchy/assign
 export const assignHierarchy = async (req: Request, res: Response) => {
   try {
-    const { tenantId } = req.params;
+    const { tenantId } = req.params as { tenantId: string };
     const { userId, managerId } = req.body as {
       userId?: string;
       managerId?: string;
@@ -27,7 +27,7 @@ export const assignHierarchy = async (req: Request, res: Response) => {
 // GET /api/:tenantId/hierarchy/tree
 export const getHierarchyTree = async (req: Request, res: Response) => {
   try {
-    const { tenantId } = req.params;
+    const { tenantId } = req.params as { tenantId: string };
     if (!tenantId) {
       return res.status(400).json({ message: "tenantId is required" });
     }

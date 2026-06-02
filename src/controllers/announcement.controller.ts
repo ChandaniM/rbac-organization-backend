@@ -9,7 +9,7 @@ export const createAnnouncement = async (
   res: Response
 ) => {
   try {
-    const { tenantId, userId } = req.params;
+    const { tenantId, userId } = req.params as { tenantId: string; userId: string };
     const { title, description, priority } = req.body;
 
     if (!tenantId) {
@@ -51,7 +51,7 @@ export const getAllAnnouncements = async (
   res: Response
 ) => {
   try {
-    const { tenantId } = req.params;
+    const { tenantId } = req.params as { tenantId: string; userId: string };
     const { page = "1", limit = "10", search = "" } = req.query;
 
     if (!tenantId) {
