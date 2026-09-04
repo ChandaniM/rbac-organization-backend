@@ -130,6 +130,58 @@ const routeMapping: Record<string, { entity: string; actionMap: Record<string, s
       'PUT': 'INVITATION_ACCEPTED',
       'DELETE': 'INVITATION_REJECTED'
     }
+  },
+  '/projects': {
+    entity: 'PROJECT',
+    actionMap: {
+      'GET': 'VIEW',
+      'POST': 'CREATE',
+      'PUT': 'UPDATE',
+      'PATCH': 'UPDATE',
+      'DELETE': 'DELETE'
+    }
+  },
+  '/tasks': {
+    entity: 'TASK',
+    actionMap: {
+      'GET': 'VIEW',
+      'POST': 'CREATE',
+      'PUT': 'UPDATE',
+      'PATCH': 'UPDATE',
+      'DELETE': 'DELETE'
+    }
+  },
+  '/board': {
+    entity: 'TASK',
+    actionMap: {
+      'GET': 'VIEW'
+    }
+  },
+  '/comments': {
+    entity: 'TASK_COMMENT',
+    actionMap: {
+      'GET': 'VIEW',
+      'POST': 'CREATE',
+      'DELETE': 'DELETE'
+    }
+  },
+  '/activity': {
+    entity: 'TASK_ACTIVITY',
+    actionMap: {
+      'GET': 'VIEW'
+    }
+  },
+  '/monitoring/queues': {
+    entity: 'QUEUE_MONITOR',
+    actionMap: {
+      'GET': 'VIEW'
+    }
+  },
+  '/monitoring/deduplication': {
+    entity: 'DEDUPLICATION',
+    actionMap: {
+      'GET': 'VIEW'
+    }
   }
 };
 
@@ -204,11 +256,18 @@ export const auditLogMiddleware = (options?: { excludePaths?: string[] }) => {
         // Log if no pattern matched
         if (entity === 'UNKNOWN') {
           console.log(`Audit Log: No pattern matched for path "${req.path}", Method: ${req.method}`);
+          return; // Skip logging for unknown routes
         }
 
         // Skip logging for dashboard view events
         if (entity === 'DASHBOARD' && action === 'VIEW') {
           console.log(`Audit Log: Skipping dashboard view event for path "${req.path}"`);
+          return;
+        }
+
+        // Skip if action is UNKNOWN
+        if (action === 'UNKNOWN') {
+          console.log(`Audit Log: Unknown action for path "${req.path}", Method: ${req.method}`);
           return;
         }
 

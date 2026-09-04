@@ -78,7 +78,9 @@ const AuditLogSchema = new Schema<IAuditLog>(
       enum: [
         "USER", "ORGANIZATION", "ROLE", "PERMISSION", "ROLE_PERMISSION",
         "ANNOUNCEMENT", "JOB", "DOCUMENT", "DASHBOARD", "SETTINGS",
-        "INVITATION", "SESSION", "FILE", "REPORT", "AUDIT_LOG"
+        "INVITATION", "SESSION", "FILE", "REPORT", "AUDIT_LOG",
+        "PROJECT", "TASK", "TASK_COMMENT", "TASK_ACTIVITY",
+        "NOTIFICATION", "QUEUE_MONITOR", "DEDUPLICATION"
       ]
     },
     entityId: { 

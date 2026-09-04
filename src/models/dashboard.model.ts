@@ -6,6 +6,4 @@ const DashboardSchema = new Schema({
   config: { type: Schema.Types.Mixed }, // flexible JSON config
 });
 
-DashboardSchema.index({ tenantId: 1 });
-
 export const Dashboard = model("Dashboard", DashboardSchema);

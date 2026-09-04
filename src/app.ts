@@ -10,13 +10,20 @@ import announcementRoutes from './routes/announcement.routes';
 import dashboardRoutes from './routes/dashboard.routes';
 import NotificationRoutes from './routes/notification.routes';
 import auditLogRoutes from './routes/audit-log.routes';
+import queueMonitorRoutes from './routes/queue-monitor.routes';
+import deduplicationMonitorRoutes from './routes/deduplication-monitor.routes';
+import projectRoutes from './routes/project.routes';
+import taskRoutes from './routes/task.routes';
 import { auditLogMiddleware } from './middlewares/audit-log.middleware';
+import './config/redis.config';
+
 const app = express();
 
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 app.use(express.json());
 
@@ -48,7 +55,9 @@ app.use("/api/announcements", announcementRoutes);
 app.use('/api', dashboardRoutes);
 app.use('/api/notifications', NotificationRoutes);
 app.use('/api', auditLogRoutes);
-// Global error handler (should be after routes)
-// app.use(errorHandler);
+app.use('/api/monitoring', queueMonitorRoutes);
+app.use('/api/monitoring', deduplicationMonitorRoutes);
+app.use('/api', projectRoutes);
+app.use('/api', taskRoutes);
 
 export default app;

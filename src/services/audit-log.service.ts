@@ -1,6 +1,7 @@
 import { AuditLog, IAuditLog } from "../models/audit-log.model";
 import { Types } from "mongoose";
 import { getRolesByTenant } from "../repo/roles.repo";
+import { addAuditLogToQueue } from '../queues/audit-log.queue';
 
 interface AuditLogEntry {
   tenantId: string;
@@ -43,8 +44,16 @@ interface QueryOptions {
 }
 
 // Create audit log entry
-export const createAuditLog = async (entry: AuditLogEntry): Promise<IAuditLog> => {
+export const createAuditLog = async (entry: AuditLogEntry, useQueue = true): Promise<IAuditLog | null> => {
   try {
+    if (useQueue) {
+      await addAuditLogToQueue({
+        ...entry,
+        userId: String(entry.userId),
+      });
+      return null;
+    }
+
     const auditLog = await AuditLog.create({
       ...entry,
       userId: new Types.ObjectId(entry.userId as string),

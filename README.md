@@ -10,9 +10,8 @@ routes
 awth 
 error handling
 
-- db : mkdir -p ~/data/db    
-
-- mongod --dbpath ~/data/db 
+- Start the local MongoDB and Redis services with `docker compose up -d`.
+- Stop them with `docker compose down`.
 
 
 -----------

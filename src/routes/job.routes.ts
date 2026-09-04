@@ -1,17 +1,21 @@
 import { Router } from 'express';
 import { createJob, deleteJob, getJobs, updateJob } from '../controllers/job.controller';
+import { rateLimitPresets } from '../middlewares/rate-limit.middleware';
+import { debounceMiddleware } from '../utils/debounce.util';
+
 const router = Router();
 
-// 1. Create a Job
-router.post('/:tenantId/add', createJob);
+router.post('/:tenantId/add', rateLimitPresets.api, createJob);
 
-// 2. Get All Jobs (for your Dynamic Table)
-router.get('/:tenantId/getJob', getJobs);
+router.get(
+  '/:tenantId/getJob',
+  rateLimitPresets.search,
+  debounceMiddleware(300),
+  getJobs
+);
 
-// 3. Update a Job by jobId
-router.put('/:tenantId/:jobId', updateJob);
+router.put('/:tenantId/:jobId', rateLimitPresets.api, updateJob);
 
-// 4. Delete a Job
-router.delete('/:tenantId/:jobId', deleteJob);
+router.delete('/:tenantId/:jobId', rateLimitPresets.api, deleteJob);
 
 export default router;

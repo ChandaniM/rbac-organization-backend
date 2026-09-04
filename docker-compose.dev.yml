@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: rbac-mongo-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - rbac-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: rbac-redis-dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --loglevel verbose
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    networks:
+      - rbac-network
+
+  # Optional: RedisInsight for Redis GUI/Monitoring
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: rbac-redis-insight
+    ports:
+      - "8001:8001"
+    volumes:
+      - redis-insight-data:/db
+    depends_on:
+      - redis
+    networks:
+      - rbac-network
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+    driver: local
+  redis-data:
+    driver: local
+  redis-insight-data:
+    driver: local
+
+networks:
+  rbac-network:
+    driver: bridge

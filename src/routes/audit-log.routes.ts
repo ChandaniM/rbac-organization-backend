@@ -1,25 +1,43 @@
 import { Router } from "express";
 import * as auditLogCtrl from "../controllers/audit-log.controller";
 import { authenticate } from "../middlewares/jwt.middleware";
+import { rateLimitPresets } from '../middlewares/rate-limit.middleware';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = Router();
 
-// All routes require authentication
 router.use(authenticate);
 
-// Get audit logs with filters and pagination
-router.get("/:tenantId/audit-logs", auditLogCtrl.getAuditLogs);
+router.get(
+  "/:tenantId/audit-logs",
+  rateLimitPresets.expensive,
+  cacheMiddleware({ ttl: 60, prefix: 'audit-logs' }),
+  auditLogCtrl.getAuditLogs
+);
 
-// Get audit log statistics
-router.get("/:tenantId/audit-logs/stats", auditLogCtrl.getAuditLogStats);
+router.get(
+  "/:tenantId/audit-logs/stats",
+  rateLimitPresets.expensive,
+  cacheMiddleware({ ttl: 300, prefix: 'audit-stats' }),
+  auditLogCtrl.getAuditLogStats
+);
 
-// Export audit logs
-router.get("/:tenantId/audit-logs/export", auditLogCtrl.exportAuditLogs);
+router.get(
+  "/:tenantId/audit-logs/export",
+  rateLimitPresets.expensive,
+  auditLogCtrl.exportAuditLogs
+);
 
-// Get single audit log by ID
-router.get("/:tenantId/audit-logs/:logId", auditLogCtrl.getAuditLogById);
+router.get(
+  "/:tenantId/audit-logs/:logId",
+  rateLimitPresets.api,
+  auditLogCtrl.getAuditLogById
+);
 
-// Create audit log manually (for testing or manual logging)
-router.post("/:tenantId/audit-logs", auditLogCtrl.createAuditLog);
+router.post(
+  "/:tenantId/audit-logs",
+  rateLimitPresets.api,
+  auditLogCtrl.createAuditLog
+);
 
 export default router;

@@ -8,6 +8,7 @@ import {
   SendNotificationEmailParams,
   NotificationStatus,
 } from '../types/email.types';
+import { addEmailToQueue } from '../queues/email.queue';
 
 const resend = new Resend(emailConfig.apiKey);
 
@@ -35,9 +36,9 @@ export async function sendNotificationEmail({
   user,
   event,
   data = {},
-}: SendNotificationEmailParams): Promise<NotificationStatus> {
+  useQueue = true,
+}: SendNotificationEmailParams & { useQueue?: boolean }): Promise<NotificationStatus> {
 
-  // Check notification preferences
   const prefs = user.notificationPreferences ?? {};
   if (prefs.email === false || prefs.events?.[event] === false) {
     return 'pending'; 
@@ -51,32 +52,63 @@ export async function sendNotificationEmail({
     ...data,
   });
 
+  const tenantId = org?.id ?? org?.userId;
+  const userId = user?.id && String(user.id).trim() ? user.id : null;
+  
+  if (!tenantId) {
+    throw new Error('Email service requires org with id or userId');
+  }
+
+  if (useQueue) {
+    try {
+      await addEmailToQueue({
+        to: user.email,
+        subject,
+        html,
+        event,
+        tenantId,
+        userId: userId || undefined,
+        metadata: data,
+      });
+
+      await Notification.create({
+        tenantId,
+        user_id: userId,
+        type: 'email',
+        event,
+        title: subject,
+        body: html,
+        data,
+        status: 'pending',
+        sent_at: null,
+      });
+
+      console.log(`[EmailService] Email queued for ${user.email} - Event: ${event}`);
+      return 'pending';
+    } catch (error) {
+      console.error('[EmailService] Failed to queue email:', error);
+    }
+  }
+
   let status: NotificationStatus = 'sent';
-  let errorMsg: string | null    = null;
+  let errorMsg: string | null = null;
 
   try {
     await sendRawEmail({ to: user.email, subject, html });
   } catch (err) {
-    status   = 'failed';
+    status = 'failed';
     errorMsg = err instanceof Error ? err.message : 'Unknown error';
     console.error(`[EmailService] Failed to send "${event}" to ${user.email}:`, errorMsg);
-  }
-
-  // Always log — even failures need a record
-  const tenantId = org?.id ?? org?.userId;
-  const userId = user?.id && String(user.id).trim() ? user.id : null;
-  if (!tenantId) {
-    throw new Error('Email service requires org with id or userId');
   }
 
   await Notification.create({
     tenantId,
     user_id: userId,
-    type:    'email',
+    type: 'email',
     event,
-    title:   subject,
-    body:    html,
-    data:    { ...data, error: errorMsg },
+    title: subject,
+    body: html,
+    data: { ...data, error: errorMsg },
     status,
     sent_at: status === 'sent' ? new Date() : null,
   });

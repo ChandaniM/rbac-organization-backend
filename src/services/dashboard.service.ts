@@ -1,4 +1,6 @@
 import * as dashboardRepo from '../repo/dashboard.repo';
+import CacheService from '../utils/cache.util';
+import { deduplicate } from '../utils/request-deduplication.util';
 
 /**
  * Dashboard Service
@@ -38,17 +40,27 @@ export interface OrgAdminDashboardResponse {
  * @returns Promise<SystemAdminMetrics> - Total, active, and inactive tenant counts
  */
 export const getSystemAdminMetrics = async (): Promise<SystemAdminMetrics> => {
-  const [totalTenants, activeTenants, inactiveTenants] = await Promise.all([
-    dashboardRepo.countAllTenants(),
-    dashboardRepo.countActiveTenants(),
-    dashboardRepo.countInactiveTenants(),
-  ]);
+  // Request deduplication will merge concurrent calls
+  // Cache will serve repeated calls
+  return CacheService.remember(
+    'system-admin-metrics',
+    async () => {
+      console.log('[Dashboard] Executing DB query for system admin metrics');
+      
+      const [totalTenants, activeTenants, inactiveTenants] = await Promise.all([
+        dashboardRepo.countAllTenants(),
+        dashboardRepo.countActiveTenants(),
+        dashboardRepo.countInactiveTenants(),
+      ]);
 
-  return {
-    totalTenants,
-    activeTenants,
-    inactiveTenants,
-  };
+      return {
+        totalTenants,
+        activeTenants,
+        inactiveTenants,
+      };
+    },
+    { ttl: 300, prefix: 'dashboard' }
+  );
 };
 
 /**
@@ -61,27 +73,35 @@ export const getSystemAdminMetrics = async (): Promise<SystemAdminMetrics> => {
 export const getOrgAdminMetrics = async (
   tenantId: string,
 ): Promise<OrgAdminDashboardResponse> => {
-  // Get organization name first to validate tenant exists
-  const orgName = await dashboardRepo.getOrgNameByTenantId(tenantId);
+  // Request deduplication will merge concurrent calls for same tenant
+  // Cache will serve repeated calls
+  return CacheService.remember(
+    `org-admin-metrics:${tenantId}`,
+    async () => {
+      console.log(`[Dashboard] Executing DB query for tenant: ${tenantId}`);
+      
+      const orgName = await dashboardRepo.getOrgNameByTenantId(tenantId);
 
-  if (!orgName) {
-    throw new Error('Organization not found');
-  }
+      if (!orgName) {
+        throw new Error('Organization not found');
+      }
 
-  // Get user metrics for the tenant
-  const [totalUsers, activeUsers, inactiveUsers] = await Promise.all([
-    dashboardRepo.countUsersByTenant(tenantId),
-    dashboardRepo.countActiveUsersByTenant(tenantId),
-    dashboardRepo.countInactiveUsersByTenant(tenantId),
-  ]);
+      const [totalUsers, activeUsers, inactiveUsers] = await Promise.all([
+        dashboardRepo.countUsersByTenant(tenantId),
+        dashboardRepo.countActiveUsersByTenant(tenantId),
+        dashboardRepo.countInactiveUsersByTenant(tenantId),
+      ]);
 
-  return {
-    tenantId,
-    orgName,
-    metrics: {
-      totalUsers,
-      activeUsers,
-      inactiveUsers,
+      return {
+        tenantId,
+        orgName,
+        metrics: {
+          totalUsers,
+          activeUsers,
+          inactiveUsers,
+        },
+      };
     },
-  };
+    { ttl: 300, prefix: 'dashboard' }
+  );
 };
